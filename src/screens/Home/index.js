@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Text, View, Dimensions, Image, StyleSheet, ScrollView } from 'react-native';
-import { gStyle, colors, device, fonts } from '../../constants';
 import { Content } from 'native-base';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Dimensions, Text, View } from 'react-native';
 // import Cast from '../../components/Cast';
 import HeaderHome from '../../components/HeaderHome';
+import HomeContent from '../../components/HomeContent';
 import PromotionBanner from '../../components/PromotionBanner';
 import ShowScroller from '../../components/ShowScroller';
-const anh = require('../../assets/images/content/good-will-hunting.jpg')
-import HomeContent from '../../components/HomeContent';
+import { gStyle } from '../../constants';
 var deviceHeight = Dimensions.get("window").height;
 var deviceWidth = Dimensions.get("window").width;
 
@@ -34,7 +33,6 @@ class Home extends React.Component {
     show = currentOffset < this.offset;
 
     if (show !== showHeader || this.offset <= 0) {
-      // account for negative value with "bounce" offset
       if (this.offset <= 0) show = true;
 
       this.setState({
@@ -54,19 +52,16 @@ class Home extends React.Component {
         <HeaderHome
           navigation={navigation}
           show={showHeader} />
-
-        <Content bounces onScroll={this.onScroll} scrollEventThrottle={20}>
-          {/* <Content bounces onScroll={this.onScroll} scrollEventThrottle={16}> */}
-          <PromotionBanner />
-          <Text style={gStyle.heading}>Previews</Text>
-          <ShowScroller
-            navigation={navigation} />
-          <Text style={gStyle.heading}>News</Text>
-          <HomeContent data='props' />
-        </Content>
-
-        {/* <Cast navigation={navigation} /> */}
-      </View>
+          <Content bounces onScroll={this.onScroll} scrollEventThrottle={20}>
+            <PromotionBanner />
+            <Text style={gStyle.heading}>Previews</Text>
+            <ShowScroller
+              navigation={navigation} />
+            <Text style={gStyle.heading}>News</Text>
+            <HomeContent data='props' />
+          </Content>
+        </View>
+      
     );
   }
 }

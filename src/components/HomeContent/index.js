@@ -22,8 +22,6 @@ const data = [
         content: 'Content Every Mobile App You’ve Ever Every Mobile App You’ve',
         image: anh
     },
-
-
 ]
 
 class HomeContent extends Component {
@@ -36,9 +34,6 @@ class HomeContent extends Component {
 
     componentDidMount() {
 
-        console.log('data31321')
-        console.log(this.props)
-
     }
 
     onClick(id) {
@@ -50,7 +45,7 @@ class HomeContent extends Component {
 
             <FlatList
                 data={data}
-                renderItem={({ item }) => (
+                renderItem={({ item, i }) => (
                     <TouchableOpacity activeOpacity={0.7}
                         onPress={() => this.onClick(item.image)}
                     >
@@ -66,7 +61,7 @@ class HomeContent extends Component {
 
                     </TouchableOpacity>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => String(index)}
             // extraData={selected}
             />
 

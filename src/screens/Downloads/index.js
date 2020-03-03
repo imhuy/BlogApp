@@ -1,38 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { Animated, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import Video from 'react-native-video';
+import styles from './styles';
+const devive = Dimensions.get('window');
+class Downloads extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rate: 1,
+      volume: 1,
+      muted: false,
+      resizeMode: 'contain',
+      duration: 0.0,
+      currentTime: 0.0,
+      controls: false,
+      paused: true,
+      currentTime: 0,
+    };
+  }
+  onLoad(data) {
+    console.log('On load fired!');
+    this.setState({ duration: data.duration });
+  }
 
-const FadeInView = (props) => {
-  const [fadeAnim] = useState(new Animated.Value(0))  // Initial value for opacity: 0
+  onProgress(data) {
+    this.setState({ currentTime: data.currentTime });
+  }
 
-  React.useEffect(() => {
-    Animated.timing(
-      fadeAnim,
-      {
-        toValue: 1,
-        duration: 10000,
-      }
-    ).start();
-  }, [])
 
-  return (
-    <Animated.View                 // Special animatable View
-      style={{
-        ...props.style,
-        opacity: fadeAnim,         // Bind opacity to animated value
-      }}
-    >
-      {props.children}
-    </Animated.View>
-  );
+
+  render() {
+    return (
+      <View >
+        <Video
+          source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+          controls={true}
+          rate={1}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="cover"
+          onProgress={({ currentTime }) => this.setState({ currentTime })}
+          style={{ width: devive.width, height: 100 }}
+        />
+        <Text>{this.state.currentTime}</Text>
+      </View>
+    );
+  }
 }
 
-// You can then use your `FadeInView` in place of a `View` in your components:
-export default () => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
-        <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
-      </FadeInView>
-    </View>
-  )
-}
+export default Downloads;
