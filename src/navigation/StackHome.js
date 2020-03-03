@@ -34,8 +34,6 @@ export default createStackNavigator(
         headerStyle: gStyle.navHeaderStyle
       }
     },
-
-
  
     // HomeMovies: {
     //   screen: MoviesScreen,

@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import Stack from './src/navigation/Stack';
 import { StatusBar } from 'react-native';
 
+import Downloads from './src/screens/Downloads';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ class App extends Component {
       <React.Fragment>
         <StatusBar barStyle="light-content" />
         <Stack />
+        {/* <Downloads /> */}
       </React.Fragment>
     );
   }

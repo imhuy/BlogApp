@@ -4,8 +4,7 @@ import myList from './myList.json';
 import previews from './previews.json';
 
 export default {
-  dumbData,
-
-  myList,
-  previews
+  // dumbData,
+  // myList,
+  // previews
 };
